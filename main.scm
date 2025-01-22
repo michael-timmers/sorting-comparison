@@ -1,0 +1,4 @@
+#!guile -s
+!#
+
+(display "hello")
