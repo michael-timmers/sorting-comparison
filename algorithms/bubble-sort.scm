@@ -1,6 +1,11 @@
 (define-module (algorithms bubble-sort)
 #:export (bubble-sort single-bubble))
 
+;;Not the same as a for-loop style bubble sort
+;;instead it calls single-bubble which moves the largest numbre to the end
+;;then the list is reversed and the single-bubble sort is called again on the other elements.
+;;the list is returned in reverse order
+
 (define (bubble-sort lst)
     (cond ((null? lst)
         '())

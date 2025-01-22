@@ -18,5 +18,5 @@
 (define (get-avg-exc-time func num-tests)
     (quotient (fold + 0
     ;;drop the first time, since this takes longer due to loading function into byte code or whatever it is doing...
-        (cdr (map (lambda (x) (car (get-elapsed-time func))) (make-list num-tests))))
+        (cdr (map (lambda (_) (car (get-elapsed-time func))) (make-list num-tests))))
      num-tests))
