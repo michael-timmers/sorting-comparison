@@ -1,4 +1,13 @@
-#!guile -s
+#!guile \
+-e main -s
+
+run the script with ./main.scm
 !#
 
-(display "hello")
+(add-to-load-path "algorithms" )
+
+(use-modules (algorithms bubble-sort))
+
+(define (main args)
+(display (bubble-sort args))
+(newline))
