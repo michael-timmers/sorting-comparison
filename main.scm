@@ -4,9 +4,6 @@
 run the script with ./main.scm
 !#
 
-(add-to-load-path "timing")
-(add-to-load-path "algorithms" )
-
 (use-modules (timing get-elapsed-time))
 (use-modules (algorithms bubble-sort))
 

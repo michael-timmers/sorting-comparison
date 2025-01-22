@@ -1,11 +1,13 @@
 (define-module (algorithms bubble-sort)
-#:export (bubble-sort))
+#:export (bubble-sort single-bubble))
 
 (define (bubble-sort lst)
-    (if (null? lst)
-        '()
-        (let* ((lst-rev (reverse lst)))
-            (cons (car lst-rev) (bubble-sort (single-buble (cdr rev-list)))))))
+    (cond ((null? lst)
+        '())
+        ((null? (cdr lst))
+        lst)
+        (else (let* ((lst-rev (reverse (single-bubble lst))))
+            (cons (car lst-rev) (bubble-sort (single-bubble (cdr lst-rev))))))))
 
 (define (single-bubble lst)
     (cond ((null? (cdr lst))
