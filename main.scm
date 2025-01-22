@@ -4,10 +4,13 @@
 run the script with ./main.scm
 !#
 
+(add-to-load-path "timing")
 (add-to-load-path "algorithms" )
 
+(use-modules (timing get-elapsed-time))
 (use-modules (algorithms bubble-sort))
 
 (define (main args)
-(display (bubble-sort args))
-(newline))
+    (define func (lambda () (bubble-sort args)))
+    (display (func))
+    (newline))
