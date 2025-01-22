@@ -1,6 +1,7 @@
-(define-module (timing get-elapsed-time)
+(define-module (timing utils)
+#:use-module (srfi srfi-1)
 #:use-module (srfi srfi-19) ;;import the time and date library
-    #:export (get-elapsed-time))
+    #:export (get-elapsed-time get-avg-exc-time))
 
 (define (time->microseconds t)
   (+ (* (time-second t) 1000000) (quotient (time-nanosecond t) 1000)))  ;; Convert ns to µs
@@ -13,3 +14,9 @@
     (elapsed-time (time->microseconds (time-difference end start)))
         (display "elapsed time: " ) (display elapsed-time) (display " µs\n"))
     (cons elapsed-time result)))
+
+(define (get-avg-exc-time func num-tests)
+    (quotient (fold + 0
+    ;;drop the first time, since this takes longer due to loading function into byte code or whatever it is doing...
+        (cdr (map (lambda (x) (car (get-elapsed-time func))) (make-list num-tests))))
+     num-tests))
