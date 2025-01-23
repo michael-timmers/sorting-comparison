@@ -10,8 +10,8 @@ run the script with ./main.scm
 (use-modules (algorithms quick-sort))
 (use-modules (algorithms merge-sort))
 
-(define MAX-VAL 10)
-(define LIST-LENGTH 10)
+(define MAX-VAL 100)
+(define LIST-LENGTH 100)
 (define unsorted-list (map (lambda (_) (random MAX-VAL)) (make-list LIST-LENGTH)))
 (define NUM-TESTS 1000)
 
