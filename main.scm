@@ -21,15 +21,14 @@ run the script with ./main.scm
     (newline))
 
 (define (test-algorithm prod)
-    (display "testing ") (display (prcedure-name prod))
-    (display "\nUnsorted:")
-    (display unsorted-list)
-    (newline)
-    (display "sorted:")
-    (display (prod unsorted-list)))
+    (display "Testing ") (display (procedure-property prod 'name))
+    (display "\nUnsorted:") (display unsorted-list)
+    (display "\nSorted:") (display (prod unsorted-list))
+    (newline))
 
 (define (time-profile prod)
-    (display "timing ") (display (prcedure-name prod))
     ;;compose the sorting algorithm with the unsorted list so that it can be passed to the timing function.
     (define func (lambda () (prod unsorted-list)))
-    (display (get-avg-exc-time func NUM-TESTS)))
+    (display "Timing ") (display (procedure-property prod 'name))
+    (display "\nAverage time: ") (display (get-avg-exc-time func NUM-TESTS))
+    (newline))
