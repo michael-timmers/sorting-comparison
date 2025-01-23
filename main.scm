@@ -17,6 +17,7 @@ run the script with ./main.scm
 
 (define (main args)
     (display "Sorting algorithm comparison\n")
+    (run-tests bubble-sort)
 (run-tests quick-sort)
 (run-tests merge-sort))
 
