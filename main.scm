@@ -17,9 +17,10 @@ run the script with ./main.scm
 
 (define (main args)
     (display "Sorting algorithm comparison\n")
+    (display MAX-VAL) (display " max val, ") (display LIST-LENGTH) (display " list length and ") (display NUM-TESTS) (display " repeated averages of time.\n")
     (run-tests bubble-sort #f)
     (run-tests quick-sort #f)
-(run-tests merge-sort #f))
+    (run-tests merge-sort #f))
 
 (define (run-tests prod display-result?)
     (test-algorithm prod display-result?)
