@@ -11,7 +11,7 @@ run the script with ./main.scm
 (use-modules (algorithms merge-sort))
 
 (define MAX-VAL 100)
-(define LIST-LENGTH 100)
+(define LIST-LENGTH 1000)
 (define unsorted-list (map (lambda (_) (random MAX-VAL)) (make-list LIST-LENGTH)))
 (define NUM-TESTS 1000)
 
@@ -43,5 +43,5 @@ run the script with ./main.scm
     ;;compose the sorting algorithm with the unsorted list so that it can be passed to the timing function.
     (define func (lambda () (proc unsorted-list)))
     (display "Timing ") (display (procedure-property proc 'name))
-    (display "\nAverage time: ") (display (get-avg-exc-time func NUM-TESTS))
+    (display "\nAverage time: ") (display (get-avg-exc-time func NUM-TESTS)) (display "μs")
     (newline))
