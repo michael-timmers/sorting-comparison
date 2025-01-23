@@ -17,7 +17,8 @@ run the script with ./main.scm
 
 (define (main args)
     (display "Sorting algorithm comparison\n")
-(run-tests quick-sort))
+(run-tests quick-sort)
+(run-tests merge-sort))
 
 (define (run-tests prod)
     (test-algorithm prod)

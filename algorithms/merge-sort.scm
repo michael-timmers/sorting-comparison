@@ -1,17 +1,18 @@
 (define-module (algorithms merge-sort)
 #:use-module (srfi srfi-1)
+#:use-module (srfi srfi-11)
 #:export (merge-sort split-list merge-lists))
 
 (set-procedure-property! merge-sort 'name "Merge sort")
 (define (merge-sort lst)
-    (if (number? lst)
+    (if (null? (cdr lst))
         lst
 (let-values (((l1 l2) (split-list lst)))
-l1)))
+(merge (merge-sort l1) (merge-sort l2)))))
 
 (define (split-list lst)
-(if (= (length lst) 1)
-lst
+(if (null? (cdr lst))
+(values '() lst)
 (let*  ((n (quotient (length lst) 2)))
 (values (take lst n) (drop lst n))))) ;;return two lists 
 
