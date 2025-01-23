@@ -1,6 +1,7 @@
 (define-module (algorithms quick-sort)
     #:use-module (srfi srfi-1) ;;partition
     #:use-module (srfi srfi-11) ;;let-values
+    #:use-module (utils last)
     #:export (quick-sort)) 
 
 ;Uses partition to seperate numbers that are lesser and greater than the pivot 
@@ -10,7 +11,7 @@
 (define (quick-sort lst)
     (cond ((null? lst)
     '())
-        ((or (not (pair? lst)) (null? (cdr lst)))
+        ((or (not (pair? lst)) (last lst))
         lst)
         (else (let* ((pivot (car lst)))
             (let-values (((greater lesser)
