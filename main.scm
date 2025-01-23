@@ -35,19 +35,12 @@ run the script with ./main.scm
         (newline))
     (else
         (display "\nSorted:")
-        (display (or (sorted? result) (sorted? (reverse result)) ))
+        (display (or (sorted? result <) (sorted? (reverse result) <) ))
         (newline))))
-
-(define (sorted? lst)
-    (let ((result (fold (lambda (prev curr acc)
-        (if (and (< prev curr)) curr #f))
-(car lst)
-(cdr lst))))
-(not (eq? result #f))))
 
 (define (profile-time proc)
     ;;compose the sorting algorithm with the unsorted list so that it can be passed to the timing function.
     (define func (lambda () (proc unsorted-list)))
-    (display "Timing ") (display (procedure-property prod 'name))
+    (display "Timing ") (display (procedure-property proc 'name))
     (display "\nAverage time: ") (display (get-avg-exc-time func NUM-TESTS))
     (newline))
