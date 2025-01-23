@@ -1,6 +1,6 @@
 (define-module (utils timing)
-#:use-module (srfi srfi-1)
-#:use-module (srfi srfi-19) ;;import the time and date library
+    #:use-module (srfi srfi-1)
+    #:use-module (srfi srfi-19) ;;import the time and date library
     #:export (get-elapsed-time get-avg-exc-time))
 
 (define (time->microseconds t)

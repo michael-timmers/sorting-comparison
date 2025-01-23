@@ -1,5 +1,6 @@
 (define-module (algorithms bubble-sort)
-#:export (bubble-sort single-bubble))
+    #:use-module (utils last)
+    #:export (bubble-sort single-bubble))
 
 ;;Not the same as a for-loop style bubble sort
 ;;instead it calls single-bubble which moves the largest numbre to the end
