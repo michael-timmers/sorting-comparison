@@ -5,7 +5,7 @@ run the script with ./main.scm
 !#
 
 (use-modules (srfi srfi-1))
-(use-modules (timing utils))
+(use-modules (utils timing))
 (use-modules (algorithms bubble-sort))
 (use-modules (algorithms quick-sort))
 (use-modules (algorithms merge-sort))
