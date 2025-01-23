@@ -15,12 +15,21 @@ run the script with ./main.scm
 (define NUM-TESTS 1000)
 
 (define (main args)
-(display "unsorted:")
-(display unsorted-list)
-(newline)
-    ;;compose the sorting algorithm with the args so that it can be passed to the timing function.
-    (define func (lambda () (quick-sort unsorted-list)))
-    (display (get-avg-exc-time func NUM-TESTS))
-    (newline)
-    (display (func))
+(display "Sorting algorithm comparison\n")
+(test-algorithm bubble-sort)
+(test-algorithm quick-sort)
     (newline))
+
+(define (test-algorithm prod)
+    (display "testing ") (display (prcedure-name prod))
+    (display "\nUnsorted:")
+    (display unsorted-list)
+    (newline)
+    (display "sorted:")
+    (display (prod unsorted-list)))
+
+(define (time-profile prod)
+    (display "timing ") (display (prcedure-name prod))
+    ;;compose the sorting algorithm with the unsorted list so that it can be passed to the timing function.
+    (define func (lambda () (prod unsorted-list)))
+    (display (get-avg-exc-time func NUM-TESTS)))

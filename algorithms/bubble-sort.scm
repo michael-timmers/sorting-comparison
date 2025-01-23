@@ -6,6 +6,7 @@
 ;;then the list is reversed and the single-bubble sort is called again on the other elements.
 ;;the list is returned in reverse order
 
+(set-procedure-property! bubble-sort 'name "Bubble sort")
 (define (bubble-sort lst)
     (cond ((null? lst)
         '())
@@ -20,3 +21,4 @@
         ((> (car lst) (cadr lst))
             (cons (cadr lst) (single-bubble (cons (car lst) (cddr lst))))) ;;swap the current and next elements
         (else (cons (car lst) (single-bubble (cdr lst)))))) ;;don't swap and continue
+
