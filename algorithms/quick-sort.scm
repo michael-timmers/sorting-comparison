@@ -11,7 +11,7 @@
 (define (quick-sort lst)
     (cond ((null? lst)
     '())
-        ((or (not (pair? lst)) (last lst))
+        ((or (not (pair? lst)) (last? lst))
         lst)
         (else (let* ((pivot (car lst)))
             (let-values (((greater lesser)
