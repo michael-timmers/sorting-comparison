@@ -8,19 +8,20 @@ run the script with ./main.scm
 (use-modules (timing utils))
 (use-modules (algorithms bubble-sort))
 (use-modules (algorithms quick-sort))
+(use-modules (algorithms merge-sort))
 
-(define MAX-VAL 100)
-(define LIST-LENGTH 100)
+(define MAX-VAL 10)
+(define LIST-LENGTH 10)
 (define unsorted-list (map (lambda (_) (random MAX-VAL)) (make-list LIST-LENGTH)))
 (define NUM-TESTS 1000)
 
 (define (main args)
-(display "Sorting algorithm comparison\n")
-(test-algorithm bubble-sort)
-(profile-time bubble-sort)
-(newline)
-(test-algorithm quick-sort)
-(profile-time quick-sort)
+    (display "Sorting algorithm comparison\n")
+(run-tests quick-sort))
+
+(define (run-tests prod)
+    (test-algorithm prod)
+    (profile-time prod)
     (newline))
 
 (define (test-algorithm prod)
