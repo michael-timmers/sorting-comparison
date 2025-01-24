@@ -1,0 +1,11 @@
+(define-module (algorithms selection-sort)
+    #:use-module (srfi srfi-1)
+    #:export (selection-sort))
+
+(set-procedure-property! selection-sort 'name "Selection sort")
+(define (selection-sort lst)
+    (if (null? lst)
+        '()
+        (let (min-val (fold min (car lst) lst))
+            (rest (remove min-val lst)))
+        (cons min-val rest))))

@@ -9,9 +9,10 @@ run the script with ./main.scm
 (use-modules (algorithms bubble-sort))
 (use-modules (algorithms quick-sort))
 (use-modules (algorithms merge-sort))
+(use-modules (algorithms selection-sort))
 
-(define MAX-VAL 100)
-(define LIST-LENGTH 1000)
+(define MAX-VAL 10)
+(define LIST-LENGTH 10)
 (define unsorted-list (map (lambda (_) (random MAX-VAL)) (make-list LIST-LENGTH)))
 (define NUM-TESTS 1000)
 
@@ -20,7 +21,8 @@ run the script with ./main.scm
     (display MAX-VAL) (display " max val, ") (display LIST-LENGTH) (display " list length and ") (display NUM-TESTS) (display " repeated averages of time.\n")
     (run-tests bubble-sort #f)
     (run-tests quick-sort #f)
-    (run-tests merge-sort #f))
+    (run-tests merge-sort #f)
+    (run-tests selection-sort))
 
 (define (run-tests prod display-result?)
     (test-algorithm prod display-result?)
