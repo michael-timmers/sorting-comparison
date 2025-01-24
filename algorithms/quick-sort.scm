@@ -8,12 +8,12 @@
 ;;recursively does this.
 
 (set-procedure-property! quick-sort 'name "Quick sort")
-(define (quick-sort lst)
+(define (quick-sort lst compr)
     (cond ((null? lst)
     '())
         ((or (not (pair? lst)) (last? lst))
         lst)
         (else (let* ((pivot (car lst)))
             (let-values (((greater lesser)
-                (partition (lambda (x) (< pivot x)) (cdr lst))))
-              (append (quick-sort greater) (list pivot) (quick-sort lesser)) )))))
+                (partition (lambda (x) (compr pivot x)) (cdr lst))))
+              (append (quick-sort greater compr) (list pivot) (quick-sort lesser compr)) )))))

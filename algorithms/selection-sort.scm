@@ -3,12 +3,12 @@
     #:export (selection-sort))
 
 (set-procedure-property! selection-sort 'name "Selection sort")
-(define (selection-sort lst)
+(define (selection-sort lst compr)
     (if (null? lst)
         '()
         (let* ((min-val (fold min (car lst) lst))
             (rest (delete-first min-val lst)))
-        (cons min-val (selection-sort rest)))))
+        (cons min-val (selection-sort rest compr)))))
 
 (define (delete-first x lst)
 (cond ((null? lst)

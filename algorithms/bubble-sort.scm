@@ -8,18 +8,18 @@
 ;;the list is returned in reverse order
 
 (set-procedure-property! bubble-sort 'name "Bubble sort")
-(define (bubble-sort lst)
+(define (bubble-sort lst compr)
     (cond ((null? lst)
         '())
         ((last? lst)
         lst)
-        (else (let* ((lst-rev (reverse (single-bubble lst))))
-            (cons (car lst-rev) (bubble-sort (single-bubble (cdr lst-rev))))))))
+        (else (let* ((lst-rev (reverse (single-bubble lst compr))))
+            (cons (car lst-rev) (bubble-sort (single-bubble (cdr lst-rev) compr) compr))))))
 
-(define (single-bubble lst)
+(define (single-bubble lst compr)
     (cond ((last? lst)
             (cons (car lst) '()))
-        ((> (car lst) (cadr lst))
+        ((compr (car lst) (cadr lst))
             (cons (cadr lst) (single-bubble (cons (car lst) (cddr lst))))) ;;swap the current and next elements
         (else (cons (car lst) (single-bubble (cdr lst)))))) ;;don't swap and continue
 

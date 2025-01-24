@@ -16,7 +16,8 @@ run the script with ./main.scm
 (define unsorted-list (map (lambda (_) (random MAX-VAL)) (make-list LIST-LENGTH)))
 (define NUM-TESTS 1000)
 
-(define sorting-algorithms (list bubble-sort quick-sort merge-sort selection-sort))
+(set-procedure-property! sort 'name "Builtin sort")
+(define sorting-algorithms (list bubble-sort quick-sort merge-sort selection-sort sort))
 
 (define (main args)
     (display "Sorting algorithm comparison\n")
@@ -24,22 +25,23 @@ run the script with ./main.scm
 (display (rank-sorts sorting-algorithms)))
 
 (define (rank-sorts sorts)
-    (let ((results (map
+    (let* ((results (map
         (lambda (proc)
             (list (procedure-property proc 'name)
-                (is-sorted? (proc unsorted-list))
-                (get-avg-exc-time (lambda () (proc unsorted-list)) NUM-TESTS)
-                ))
-        sorts)))
-    results))
+                (is-sorted? (proc unsorted-list <))
+                (get-avg-exc-time (lambda () (proc unsorted-list <)) NUM-TESTS)))
+        sorts))
+        (ranked (sort results
+            (lambda (a b) (< (caddr a) (caddr b))))))
+    ranked))
 
 (define (run-tests prod display-result?)
-    (test-algorithm prod display-result?)
-    (profile-time prod )
+    (test-algorithm prod < display-result?)
+    (profile-time prod <)
     (newline))
 
-(define (test-algorithm proc display-result?)
-    (define result (proc unsorted-list))
+(define (test-algorithm proc compr display-result?)
+    (define result (proc unsorted-list compr))
     (display "Testing ") (display (procedure-property proc 'name))
     (cond ((eq? display-result? #t)
         (display "\nUnsorted:") (display unsorted-list)
@@ -50,9 +52,9 @@ run the script with ./main.scm
         (display (is-sorted? lst))
         (newline))))
 
-(define (profile-time proc)
+(define (profile-time proc compr)
     ;;compose the sorting algorithm with the unsorted list so that it can be passed to the timing function.
-    (define func (lambda () (proc unsorted-list)))
+    (define func (lambda () (proc unsorted-list compr)))
     (display "Timing ") (display (procedure-property proc 'name))
     (display "\nAverage time: ") (display (get-avg-exc-time func NUM-TESTS)) (display "μs")
     (newline))
