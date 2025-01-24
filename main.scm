@@ -22,7 +22,7 @@ run the script with ./main.scm
     (run-tests bubble-sort #f)
     (run-tests quick-sort #f)
     (run-tests merge-sort #f)
-    (run-tests selection-sort))
+    (run-tests selection-sort #t))
 
 (define (run-tests prod display-result?)
     (test-algorithm prod display-result?)

@@ -6,6 +6,15 @@
 (define (selection-sort lst)
     (if (null? lst)
         '()
-        (let (min-val (fold min (car lst) lst))
-            (rest (remove min-val lst)))
-        (cons min-val rest))))
+        (let* ((min-val (fold min (car lst) lst))
+            (rest (delete-first min-val lst)))
+        (cons min-val (selection-sort rest)))))
+
+(define (delete-first x lst)
+(cond ((null? lst)
+'())
+((= x (car lst))
+(cdr lst))
+(else
+(cons (car lst) (delete-first x (cdr lst)))
+)))
