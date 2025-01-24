@@ -16,13 +16,22 @@ run the script with ./main.scm
 (define unsorted-list (map (lambda (_) (random MAX-VAL)) (make-list LIST-LENGTH)))
 (define NUM-TESTS 1000)
 
+(define sorting-algorithms (list bubble-sort quick-sort merge-sort selection-sort))
+
 (define (main args)
     (display "Sorting algorithm comparison\n")
-    (display MAX-VAL) (display " max val, ") (display LIST-LENGTH) (display " list length and ") (display NUM-TESTS) (display " repeated averages of time.\n")
-    (run-tests bubble-sort #f)
-    (run-tests quick-sort #f)
-    (run-tests merge-sort #f)
-    (run-tests selection-sort #t))
+    (display MAX-VAL) (display " max val, ") (display LIST-LENGTH) (display " list length and ") (display NUM-TESTS) (display " repeated averages of time.\n\n")
+(display (rank-sorts sorting-algorithms)))
+
+(define (rank-sorts sorts)
+    (let ((results (map
+        (lambda (proc)
+            (list (procedure-property proc 'name)
+                (is-sorted? (proc unsorted-list))
+                (get-avg-exc-time (lambda () (proc unsorted-list)) NUM-TESTS)
+                ))
+        sorts)))
+    results))
 
 (define (run-tests prod display-result?)
     (test-algorithm prod display-result?)
@@ -38,7 +47,7 @@ run the script with ./main.scm
         (newline))
     (else
         (display "\nSorted:")
-        (display (or (sorted? result <) (sorted? (reverse result) <) ))
+        (display (is-sorted? lst))
         (newline))))
 
 (define (profile-time proc)
@@ -47,3 +56,7 @@ run the script with ./main.scm
     (display "Timing ") (display (procedure-property proc 'name))
     (display "\nAverage time: ") (display (get-avg-exc-time func NUM-TESTS)) (display "μs")
     (newline))
+
+;;checks both ways of sorting
+    (define (is-sorted? lst)
+    (or (sorted? lst <) (sorted? lst >)))
