@@ -18,7 +18,7 @@ run the script with ./main.scm
 
 (set-procedure-property! sort 'name "Builtin sort")
 (set-procedure-property! stable-sort 'name "Builtin stable sort")
-(define sorting-algorithms (list bubble-sort quick-sort merge-sort selection-sort sort stable-sort))
+(define sorting-algorithms (list bubble-sort bubble-sort2 quick-sort merge-sort selection-sort sort stable-sort))
 
 (define (main args)
     (display "Sorting algorithm comparison\n")
