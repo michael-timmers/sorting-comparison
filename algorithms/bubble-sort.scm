@@ -1,6 +1,6 @@
 (define-module (algorithms bubble-sort)
     #:use-module (utils last)
-    #:export (bubble-sort single-bubble))
+    #:export (bubble-sort))
 
 ;;Not the same as a for-loop style bubble sort
 ;;instead it calls single-bubble which moves the largest numbre to the end
@@ -20,6 +20,5 @@
     (cond ((last? lst)
             (cons (car lst) '()))
         ((compr (car lst) (cadr lst))
-            (cons (cadr lst) (single-bubble (cons (car lst) (cddr lst))))) ;;swap the current and next elements
-        (else (cons (car lst) (single-bubble (cdr lst)))))) ;;don't swap and continue
-
+            (cons (cadr lst) (single-bubble (cons (car lst) (cddr lst)) compr))) ;;swap the current and next elements
+        (else (cons (car lst) (single-bubble (cdr lst) compr))))) ;;don't swap and continue

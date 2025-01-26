@@ -11,28 +11,38 @@ run the script with ./main.scm
 (use-modules (algorithms merge-sort))
 (use-modules (algorithms selection-sort))
 
-(define MAX-VAL 10)
-(define LIST-LENGTH 10)
+(define MAX-VAL 100)
+(define LIST-LENGTH 1000)
 (define unsorted-list (map (lambda (_) (random MAX-VAL)) (make-list LIST-LENGTH)))
 (define NUM-TESTS 1000)
 
 (set-procedure-property! sort 'name "Builtin sort")
-(define sorting-algorithms (list bubble-sort quick-sort merge-sort selection-sort sort))
+(set-procedure-property! stable-sort 'name "Builtin stable sort")
+(define sorting-algorithms (list bubble-sort quick-sort merge-sort selection-sort sort stable-sort))
 
 (define (main args)
     (display "Sorting algorithm comparison\n")
     (display MAX-VAL) (display " max val, ") (display LIST-LENGTH) (display " list length and ") (display NUM-TESTS) (display " repeated averages of time.\n\n")
-(display (rank-sorts sorting-algorithms)))
+(display-ranked-algorithms sorting-algorithms))
 
-(define (rank-sorts sorts)
+(define (display-ranked-algorithms sorts)
+    (display "  name  :  avg time (μs)  :  sorted?\n")
+    (for-each (lambda (result)
+        (display (car result)) (display " : ")
+        (display (cadr result)) (display " : ")
+        (display (caddr result)) (display "\n"))
+    (get-ranked-results sorts))
+    (newline))
+
+(define (get-ranked-results sorts)
     (let* ((results (map
         (lambda (proc)
             (list (procedure-property proc 'name)
-                (is-sorted? (proc unsorted-list <))
-                (get-avg-exc-time (lambda () (proc unsorted-list <)) NUM-TESTS)))
+                (get-avg-exc-time (lambda () (proc unsorted-list <)) NUM-TESTS)
+                (is-sorted? (proc unsorted-list <))))
         sorts))
         (ranked (sort results
-            (lambda (a b) (< (caddr a) (caddr b))))))
+            (lambda (a b) (< (cadr a) (cadr b))))))
     ranked))
 
 (define (run-tests prod display-result?)
