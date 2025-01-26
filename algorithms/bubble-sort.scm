@@ -14,7 +14,7 @@
         '())
         ((last? lst)
         lst)
-        (else (let* ((lst-rev (reverse (single-bubble lst compr))))
+        (else (let ((lst-rev (reverse (single-bubble lst compr))))
             (cons (car lst-rev) (bubble-sort (single-bubble (cdr lst-rev) compr) compr))))))
 
 (set-procedure-property! bubble-sort2 'name "Bubble sort 2")
@@ -23,7 +23,7 @@
         '())
         ((last? lst)
         lst)
-        (else (let* ((bubbled-lst (single-bubble lst <)))
+        (else (let ((bubbled-lst (single-bubble lst <)))
             (append (bubble-sort2 (drop-last bubbled-lst) compr) (list (last bubbled-lst)))))))
 
 (define (drop-last lst)
@@ -33,7 +33,7 @@
 
 (define (single-bubble lst compr)
     (cond ((last? lst)
-            (cons (car lst) '()))
-        ((not (compr (car lst) (cadr lst)))
+            lst)
+        ((compr (car lst) (cadr lst))
             (cons (cadr lst) (single-bubble (cons (car lst) (cddr lst)) compr))) ;;swap the current and next elements
         (else (cons (car lst) (single-bubble (cdr lst) compr))))) ;;don't swap and continue

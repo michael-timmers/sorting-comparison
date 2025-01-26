@@ -1,6 +1,6 @@
 (define-module (algorithms selection-sort)
     #:use-module (srfi srfi-1)
-    #:export (selection-sort))
+    #:export (selection-sort selection-sort2))
 
 (set-procedure-property! selection-sort 'name "Selection sort")
 (define (selection-sort lst compr)
@@ -10,11 +10,16 @@
             (rest (delete-first min-val lst)))
         (cons min-val (selection-sort rest compr)))))
 
+(set-procedure-property! selection-sort2 'name "Selection sort2")
+(define (selection-sort2 lst compr)
+    (if (null? lst)
+        '()
+        (let ((min-val (fold min (car lst) lst)))
+        (cons min-val (selection-sort2 (delete-first min-val lst) compr)))))
+
 (define (delete-first x lst)
-(cond ((null? lst)
-'())
-((= x (car lst))
-(cdr lst))
-(else
-(cons (car lst) (delete-first x (cdr lst)))
-)))
+    (cond ((null? lst)
+            '())
+        ((= x (car lst))
+            (cdr lst))
+        (else (cons (car lst) (delete-first x (cdr lst))))))
