@@ -14,11 +14,11 @@ run the script with ./main.scm
 (define MAX-VAL 100)
 (define LIST-LENGTH 1000)
 (define unsorted-list (map (lambda (_) (random MAX-VAL)) (make-list LIST-LENGTH)))
-(define NUM-TESTS 1000)
+(define NUM-TESTS 2000)
 
 (set-procedure-property! sort 'name "Builtin sort")
 (set-procedure-property! stable-sort 'name "Builtin stable sort")
-(define sorting-algorithms (list bubble-sort bubble-sort2 quick-sort merge-sort selection-sort selection-sort2 sort stable-sort))
+(define sorting-algorithms (list quick-sort quick-sort2 quick-sort3))
 
 (define (main args)
     (display "Sorting algorithm comparison\n")
