@@ -6,4 +6,11 @@ A project to learn sorting algorithms functionally with the Guile Scheme program
 The testign parameters can be changed in main, Where the algorithms will be ranked and then displayed.
 
 ## Running
-Install guile scheme on your system and 
+Install guile scheme on your system. Run in the sorting comparison directory with either:
+```
+./main
+```
+Or:
+```
+guile main.scm
+```
