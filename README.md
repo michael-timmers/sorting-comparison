@@ -8,7 +8,7 @@ The testign parameters can be changed in main, Where the algorithms will be rank
 ## Running
 Install guile scheme on your system. Run in the sorting comparison directory with either:
 ```
-./main
+./main.scm
 ```
 Or:
 ```
