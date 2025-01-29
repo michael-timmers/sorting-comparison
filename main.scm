@@ -11,14 +11,20 @@ run the script with ./main.scm
 (use-modules (algorithms merge-sort))
 (use-modules (algorithms selection-sort))
 
+;;change these values for different 
 (define MAX-VAL 100)
 (define LIST-LENGTH 1000)
+(define NUM-TESTS 1000)
+
+;;The test list that all algorithms will run
 (define unsorted-list (map (lambda (_) (random MAX-VAL)) (make-list LIST-LENGTH)))
-(define NUM-TESTS 2000)
+
+;;The list of all sorting algorithms that will be tested.
+;;sort and stable sort are builtin
+(define sorting-algorithms (list bubble-sort bubble-sort2 quick-sort quick-sort2 quick-sort3 merge-sort merge-sort2 merge-sort3 selection-sort selection-sort2 sort stable-sort))
 
 (set-procedure-property! sort 'name "Builtin sort")
 (set-procedure-property! stable-sort 'name "Builtin stable sort")
-(define sorting-algorithms (list merge-sort merge-sort2 merge-sort3))
 
 (define (main args)
     (display "Sorting algorithm comparison\n")
